@@ -1,5 +1,6 @@
 import os
 import subprocess
+import shutil
 
 def komprimiere_video(datei_pfad, ziel_datei_pfad):
     # Komprimiere das Video mit ffmpeg über die subprocess-Bibliothek
@@ -24,6 +25,9 @@ def komprimiere_ordnerstruktur(quellpfad, zielpfad):
             else:
                 if datei.endswith(('.mp4', '.avi', '.mkv', '.mov', '.wmv', '.flv', '.webm')): # Nur Dateien mit diesen Endungen komprimieren
                     komprimiere_video(datei_pfad, ziel_datei_pfad)
+                else:
+                    # Kopiere andere Dateien einfach in den Zielordner
+                    shutil.copy2(datei_pfad, ziel_datei_pfad)
             # Fortschritt anzeigen
             prozent = int(index / len(dateien) * 100) # Berechne den Fortschritt in Prozent
             print(f"Fortschritt des Ordners: {prozent}%") # Zeige den Fortschritt in der Konsole an
